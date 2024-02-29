@@ -1,0 +1,92 @@
+
+<div class="grid">
+    <div class="col-12">
+        <form [formGroup]="formUser" >
+            <div class=" p-fluid p-formgrid grid pt-2  ">
+
+                <div class="field col-12 -mt-2 ">
+                    <p class="font-italic font-bold text-red-600">El campo es requerido (*)</p>
+                </div>
+
+                <div class="field col-12 md:col-6  -mt-3 ">
+                    <label class="text-blue-700 font-semibold" for="username">Identificacion*</label>             
+                    <input 
+                        pInputText id="zip" placeholder="Ej. 0987654321" type="text" 
+                        formControlName="identificacion"
+                        [ngClass]="{ 'is-invalid': fieldsValidate('identificacion')}"
+                    />
+                    <small 
+                     *ngIf="formUser.get('identificacion')?.errors?.['required']"
+                    >La Identificacion es requerida.</small>
+                </div>  
+                <div class="field col-12 md:col-6  -mt-3 ">
+                    <label class="text-blue-700 font-semibold" for="username">Nombres*</label>             
+                    <input 
+                        pInputText id="zip" placeholder="Ej. Juan Alberto" type="text" 
+                        formControlName="nombres"
+                        [ngClass]="{ 'is-invalid': fieldsValidate('nombres')}"
+                    />
+                    <small 
+                     *ngIf="formUser.get('nombres')?.errors?.['required']"
+                    >Los nombres son requeridos.</small>
+                </div>  
+                <div class="field col-12 md:col-6  -mt-3 ">
+                    <label class="text-blue-700 font-semibold" for="username">Apellidos*</label>             
+                    <input 
+                        pInputText id="zip" placeholder="Ej. Piguave Loor" type="text" 
+                        formControlName="apellidos"
+                        [ngClass]="{ 'is-invalid': fieldsValidate('apellidos')}"
+                    />
+                    <small 
+                     *ngIf="formUser.get('apellidos')?.errors?.['required']"
+                    >Los apellidos son requeridos.</small>
+                </div>  
+                <div class="field col-12 md:col-6  -mt-3 ">
+                    <label class="text-blue-700 font-semibold" for="username">Contraseña*</label>             
+                    <input 
+                        pInputText id="zip" placeholder="Ej. ***********" type="text" 
+                        formControlName="contrasena"
+                        [ngClass]="{ 'is-invalid': fieldsValidate('contrasena')}"
+                    />
+                    <small 
+                     *ngIf="formUser.get('contrasena')?.errors?.['required']"
+                    >La contraseña es requerida .</small>
+                </div>  
+                <div class="field col-12 md:col-6  -mt-3 ">
+                    <label class="text-blue-700 font-semibold" for="username">Fecha nacimiento*</label>             
+                    <!-- <input 
+                         id="zip" placeholder="Ej. ***********" type="text" 
+                        
+                    /> -->
+                    <p-calendar  
+                        formControlName="fechaNacimiento"
+                        [ngClass]="{ 'is-invalid': fieldsValidate('fechaNacimiento')}"
+                        placeholder="Ej. 02/21/1997" ></p-calendar>
+                    <small 
+                    *ngIf="formUser.get('fechaNacimiento')?.errors?.['required']"
+                    >La Fecha nacimiento es requerida.</small>
+                </div>  
+            </div>
+        </form>
+
+
+        <div class="-mt-2">
+            <p-button 
+                class="justify-content-center flex align-items-center"
+                styleClass="p-button-raised p-button-info"               
+                (click)="saveUser()"
+                label="Guardar registro"
+                [disabled]="formUser.invalid"             
+            >
+
+            </p-button>  
+
+            
+        </div>
+    </div>
+</div>
+
+
+<!-- <div>
+[icon]="!isLoading ? 'pi pi-save': 'pi pi-spin pi-spinner'" 
+</div> -->

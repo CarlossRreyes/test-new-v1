@@ -1,0 +1,104 @@
+<div 
+    class="container flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden " 
+    
+    >
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div>
+            <div class="w-full bg-blue-50 border-round py-8 px-5 sm:px-8 shadow-8"  >
+                <div class="text-center mb-3">
+                    <!-- <img src="assets/img/logo_001.png" alt="Image" height="70" class="mb-3"> -->
+                    <div class="text-900 text-3xl font-bold mb-1">APP TEST</div>
+                    <span class="text-600 font-medium">Inicie sesión para continuar...</span>
+                </div>
+
+                <form [formGroup]="signInForm">
+                    <div class="">
+                        <div class="flex flex-column gap-2 -mb-1">
+                            <label class="-mb-1" htmlFor="username">Correo electrónico*</label>
+                            <input 
+                                class="w-full md:w-30rem" 
+                                style="padding:1rem" 
+                                pInputText id="email" 
+                                placeholder="Ingrese su correo."
+                                formControlName="email" [ngClass]="{ 'is-invalid': fieldsValidate('email')}"
+                            />
+
+                            <ng-container *ngIf="(signInForm.get('email')?.dirty || signInForm.get('email')?.touched)">
+                                <small *ngIf="signInForm.get('email')?.errors?.['required']" class="mb-0 -mt-1  font-normal text-red-500">El correo electrónico es requerido</small>
+                            </ng-container>
+                        </div>                          
+                    </div>
+                    <div class="">
+                        <div class="flex flex-column gap-2 pt-2">
+                            <label class="-mb-1" htmlFor="username">Contraseña*</label>
+
+                            <span class="p-input-icon-right" [style]="{'width':'100%'}">
+                                <i [class]="hide ? 'pi pi-eye-slash' : 'pi pi-eye'" (click)="hide = !hide"></i>
+                                  <input 
+                                      class="w-full md:w-30rem " 
+                                      placeholder="Ingrese su contraseña." 
+                                      style="padding:1rem" pInputText id="password" 
+                                      aria-describedby="username-help"
+                                      formControlName="password" [ngClass]="{ 'is-invalid': fieldsValidate('password')}"
+                                      [type]="hide ? 'password' : 'text'"
+                                  />
+                              </span>
+
+                            <ng-container *ngIf="(signInForm.get('password')?.dirty || signInForm.get('password')?.touched)">
+                                <small 
+                                    class="mb-0 -mt-1 font-normal text-red-500"  
+                                    id="username-help"
+                                    *ngIf="signInForm.get('password')?.errors?.['required']"
+                                >La contraseña es requerida</small>
+                            </ng-container>
+                        </div>                          
+                    </div>
+                </form>                
+                <!-- <p-divider></p-divider>          -->
+                <div class="flex align-items-center justify-content-between mb-5 gap-5">
+                    <!-- <div class="flex align-items-center">   
+                        <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
+                        <label for="rememberme1">Remember me</label>
+                    </div> -->
+<!-- 
+                  <div class="flex align-items-center justify-content-between mb-5 gap-5">
+                    <div class="flex align-items-center"> </div>
+                    <a (click)="olvidoPaasword()" class="font-medium no-underline ml-2 text-right cursor-pointer"
+                      style="color: var(--primary-color)">¿Olvidó su contraseña?</a>
+                  </div> -->
+
+                </div>
+                
+                <!-- <p-toast></p-toast> -->
+                <!-- <button
+                    size="small"
+                    pButton pRipple [disabled]="signInForm.invalid" 
+                    label="Iniciar sesión" class="w-full p-3 text-xl "
+                    (click)="signIn()"
+                ></button> -->
+                <div class="text-center">
+
+                    <p-button
+                        
+                        label="Iniciar sesión" 
+                        [disabled]="signInForm.invalid"
+                        
+                    >
+                    </p-button>
+                    <p-button
+                    class="ml-2"
+                        (click)="register()"
+                        label="Registrate aquí"
+                        severity="secondary"
+                        [disabled]="false"
+                    >
+                    </p-button>
+                 
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
