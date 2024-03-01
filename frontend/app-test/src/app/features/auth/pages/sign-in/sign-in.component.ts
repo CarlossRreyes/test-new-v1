@@ -1,16 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { Credentials } from './../../interface/auth';
-// import { AuthService } from './../../service/auth.service';
-// import { ToastService } from 'src/app/utils/toast.service';
-import { MessageService } from 'primeng/api';
-import { HttpErrorResponse } from '@angular/common/http';
+
 import { Subscription, timer } from 'rxjs';
-// import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Credentials } from '../../interfaces/auth';
 import { RegisterComponent } from '../register/register.component';
+import { AuthService } from '../../services/auth.service';
+import { ToastService } from 'src/app/utils/toast.service';
 
 
 @Component({
@@ -30,8 +27,8 @@ export class SignInComponent implements OnInit, OnDestroy {
   constructor(
     public formBuilder: FormBuilder,
     private router: Router,
-    // private service: AuthService,
-    // private _ts : ToastService,
+    private service: AuthService,
+    private _ts : ToastService,
     public dialogService: DialogService,
   ){ }
   
@@ -57,38 +54,38 @@ export class SignInComponent implements OnInit, OnDestroy {
   }
 
   signIn(){
-    // this.signInForm.markAllAsTouched();
-    // if (this.signInForm.invalid) { return; }
+    this.signInForm.markAllAsTouched();
+    if (this.signInForm.invalid) { return; }
     
-    // if (this.signInForm.valid) {
-    //   const form : Credentials = this.signInForm.value; 
-    //   this.signInService(form);
-    // }
+    if (this.signInForm.valid) {
+      const form : Credentials = this.signInForm.value; 
+      this.signInService(form);
+    }
   }
   
   signInService( data: Credentials){
-    // console.log(data);
+    console.log(data);
     
-    // this.subscription = this.service.signIn( data ).subscribe({
-    //   next: ( resp ) => {
-    //     if( resp.status ){
-    //       this._ts.showSuccess('Inicio de Sesion',resp.message);
-    //     } else {
-    //       console.log(resp);
+    this.subscription = this.service.signIn( data ).subscribe({
+      next: ( resp ) => {
+        if( resp.status ){
+          this._ts.showSuccess('Inicio de Sesion',resp.message);
+        } else {
+          console.log(resp);
           
-    //       this._ts.showError('Inicio de Sesion',resp.message);
-    //     }
-    //   }, 
-    //   error: ( err ) => {
-    //     console.log(err);
+          this._ts.showError('Inicio de Sesion',resp.message);
+        }
+      }, 
+      error: ( err ) => {
+        console.log(err);
         
-    //     this._ts.showError('Inicio de Sesion',err.error.message);
+        this._ts.showError('Inicio de Sesion',err.error.message);
         
-    //   },
-    //   complete: () => { 
-    //     this.subscription = timer(1000).subscribe( () => { this.router.navigate(['/home']); });
-    //   }
-    // })
+      },
+      complete: () => { 
+        this.subscription = timer(1000).subscribe( () => { this.router.navigate(['/home']); });
+      }
+    })
   }
 
   register(){

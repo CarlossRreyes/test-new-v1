@@ -2,9 +2,11 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription, timer } from 'rxjs';
+import { AuthService } from 'src/app/features/auth/services/auth.service';
 // import { AuthService } from 'src/app/features/auth/service/auth.service';
 
 import { LayoutService } from 'src/app/features/home/services/layout.service';
+import { ToastService } from 'src/app/utils/toast.service';
 // import { ToastService } from 'src/app/utils/toast.service';
 
 @Component({
@@ -27,9 +29,9 @@ export class TopbarComponent implements OnInit, OnDestroy {
 
   constructor(
     public layoutService: LayoutService,
-    // private authService: AuthService,
+    private authService: AuthService,
     private router: Router,
-    // private _ts : ToastService,
+    private _ts : ToastService,
 
   ) { }
     
@@ -47,12 +49,12 @@ export class TopbarComponent implements OnInit, OnDestroy {
 
 
   signOut(){
-    // this._ts.showWarn(' ','Cerrando Sesion');
+    this._ts.showWarn(' ','Cerrando Sesion');
 
-    // this.timerSubscription = timer(1000).subscribe( () => { 
-    //   this.authService.removeLocalStorage( 'token' );
-    //   this.router.navigate(['/auth']); 
-    // });
+    this.timerSubscription = timer(1000).subscribe( () => { 
+      this.authService.removeLocalStorage( 'token' );
+      this.router.navigate(['/auth']); 
+    });
   }
 
 }

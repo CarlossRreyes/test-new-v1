@@ -69,7 +69,7 @@
 
                 </div>
                 
-                <!-- <p-toast></p-toast> -->
+                <p-toast></p-toast>
                 <!-- <button
                     size="small"
                     pButton pRipple [disabled]="signInForm.invalid" 
@@ -79,7 +79,7 @@
                 <div class="text-center">
 
                     <p-button
-                        
+                        (click)="signIn()"
                         label="Iniciar sesión" 
                         [disabled]="signInForm.invalid"
                         

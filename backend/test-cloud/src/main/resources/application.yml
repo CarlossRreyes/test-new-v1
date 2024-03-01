@@ -1,0 +1,29 @@
+server:
+  port: 5000
+spring:
+  application:
+    name: gateway-service
+  jackson:
+    default-property-inclusion: NON_NULL
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+              allowedOrigins: "http://localhost:4200"              
+              allowCredentials: true
+              allowedMethods: 
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              allowedHeaders: 
+              - origin
+              - content-type
+              - accept
+              - authorization
+              - cookie
+pharmacy: 
+  web: 
+    app: 
+      jwtSecret: "510f6e65196ee4112937168153c67729ccdced9b492cb7bfd6c84a3672196061"
